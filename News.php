@@ -40,8 +40,8 @@
 
     } 
     // コメント削除機能
-    if (isset($_GET['deleteCommentId'])) {
-    $deleteCommentId = $_GET['deleteCommentId'];
+    // if (isset($_GET['deleteCommentId'])) {
+    // $deleteCommentId = $_GET['deleteCommentId'];
 
     // 削除するコメントの投稿IDを取得し、それに紐づく投稿IDを特定
     $stmt = $pdo->prepare("SELECT news_id FROM news_comments WHERE id = :commentId");
@@ -56,8 +56,6 @@
         header("Location: News.php?id=$id");
         exit();
     }
-}
-
 
 ?>
 
@@ -100,7 +98,7 @@
 
         <!-- コメントの表示 -->
         <!-- コメントと記事をリンクさせたい 表示方法も考えたい -->
-        <p><?php $sql = "SELECT comments FROM news_comments ORDER BY id DESC ";
+        <p><?php $sql = "SELECT comments FROM news_comments WHERE news_id = $id ORDER BY id DESC ";
         
         // SQLステートメントを実行し、結果を変数に格納
         $stmt = $pdo->query($sql);
